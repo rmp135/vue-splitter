@@ -60,7 +60,13 @@
           this.active = false;
         }
         if (this.active) {
-          const percent =  Math.floor((e.pageX / e.currentTarget.offsetWidth)*10000)/100;
+          let offset = 0;
+          let target = e.currentTarget;
+          while (target) {
+            offset = target.offsetLeft;
+            target = target.offsetParent;
+          }
+          const percent =  Math.floor(((e.pageX - offset) / e.currentTarget.offsetWidth)*10000)/100;
           if (percent > this.margin && percent < 100 - this.margin) {
             this.percent = percent;
           }
