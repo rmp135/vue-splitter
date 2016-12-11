@@ -1,0 +1,33 @@
+{
+  "name": "vue-splitter-comp",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/vue-splitter.js",
+  "author": {
+    "name": "Ryan Poole",
+    "email": "rmp135@gmail.com"
+  },
+  "scripts": {
+    "build": "webpack",
+    "test": "karma start"
+  },
+  "devDependencies": {
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
+    "babel-preset-es2015": "^6.18.0",
+    "css-loader": "^0.26.1",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-webpack": "^1.8.0",
+    "node-sass": "^3.4.2",
+    "phantomjs-prebuilt": "^2.1.14",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "vue": "^2.1.4",
+    "vue-loader": "^10.0.2",
+    "vue-template-compiler": "^2.1.4",
+    "webpack": "2.1.0-beta.27"
+  }
+}
