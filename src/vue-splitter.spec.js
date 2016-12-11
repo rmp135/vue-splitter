@@ -61,6 +61,7 @@ describe('vue-splitter', () => {
       const mockEvent = {
         pageX: 150,
         currentTarget: {
+          offsetLeft: 0,
           offsetWidth: 200
         }
       };
@@ -68,6 +69,24 @@ describe('vue-splitter', () => {
       vm.onMouseMove(mockEvent);
       expect(vm.percent).toBe(75);
     });
+    it('should subtract the offsetLeft of the parent until there is no parent', () => {
+      const mockEvent = {
+        pageX: 150,
+        currentTarget: {
+          offsetLeft: 10,
+          offsetWidth: 200,
+          offsetParent: {
+            offsetLeft: 0,
+            offsetParent: {
+              offsetLeft: 10
+            }
+          }
+        }
+      };
+      vm.active = true;
+      vm.onMouseMove(mockEvent);
+      expect(vm.percent).toBe(65);
+    })
     it('should set hasMoved to true when the mouse has moved', () => {
       const mockEvent = {
         pageX: 150,
@@ -79,6 +98,18 @@ describe('vue-splitter', () => {
       vm.onMouseMove(mockEvent);
       expect(vm.hasMoved).toBe(true);
     });
+    it('should trigger the onResize event', () => {
+      const spy = spyOn(vm, '$emit');
+      const mockEvent = {
+        pageX: 150,
+        currentTarget: {
+          offsetWidth: 200
+        }
+      };
+      vm.active = true;
+      vm.onMouseMove(mockEvent);
+      expect(spy).toHaveBeenCalledWith('onResize');
+    })
   });
   describe("onClick", () => {
     it("should reset the percentage if the mouse has not moved", () => {

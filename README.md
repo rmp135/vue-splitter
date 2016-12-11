@@ -34,6 +34,8 @@ Load it into the html, populating the `left-pane` and `right-pane` slots.
 
 The `margin` prop can be used to set the percentage that the dragger should not exceed on either side. Defaults to 10%.
 
+The `onResize` event will be fired when the dragger is moved.
+
 ## Using
 
 The dragger can be dragged left and right to move the panes. It can be clicked to reset to 50%.
