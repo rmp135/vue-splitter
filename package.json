@@ -1,6 +1,6 @@
 {
   "name": "vue-splitter-comp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "main": "dist/vue-splitter.js",
   "repository": {
