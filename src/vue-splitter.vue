@@ -63,7 +63,7 @@
           let offset = 0;
           let target = e.currentTarget;
           while (target) {
-            offset = target.offsetLeft;
+            offset += target.offsetLeft;
             target = target.offsetParent;
           }
           const percent =  Math.floor(((e.pageX - offset) / e.currentTarget.offsetWidth)*10000)/100;
