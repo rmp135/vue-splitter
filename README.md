@@ -2,11 +2,15 @@
 
 For splitting a view in two!
 
+__[Example](https://rmp135.github.io/vue-splitter-comp/)__
+
 ## Installing
 
 Import the component.
 
-`import VueSplitter from "vue-splitter-comp"`
+```javascript
+import VueSplitter from "vue-splitter-comp"
+```
 
 Load it into the `components` section of the vue component.
 
