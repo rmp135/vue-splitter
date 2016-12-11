@@ -70,7 +70,7 @@
           if (percent > this.margin && percent < 100 - this.margin) {
             this.percent = percent;
           }
-          this.$emit('onResize');
+          this.$emit('resize');
           this.hasMoved = true;
         }
       }

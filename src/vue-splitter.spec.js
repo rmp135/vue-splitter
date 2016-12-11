@@ -98,7 +98,7 @@ describe('vue-splitter', () => {
       vm.onMouseMove(mockEvent);
       expect(vm.hasMoved).toBe(true);
     });
-    it('should trigger the onResize event', () => {
+    it('should trigger the resize event', () => {
       const spy = spyOn(vm, '$emit');
       const mockEvent = {
         pageX: 150,
@@ -108,7 +108,7 @@ describe('vue-splitter', () => {
       };
       vm.active = true;
       vm.onMouseMove(mockEvent);
-      expect(spy).toHaveBeenCalledWith('onResize');
+      expect(spy).toHaveBeenCalledWith('resize');
     })
   });
   describe("onClick", () => {
