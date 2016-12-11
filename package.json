@@ -3,6 +3,10 @@
   "version": "1.0.3",
   "license": "MIT",
   "main": "dist/vue-splitter.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rmp135/vue-splitter-comp.git"
+  },
   "author": {
     "name": "Ryan Poole",
     "email": "rmp135@gmail.com"
