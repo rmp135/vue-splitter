@@ -123,7 +123,21 @@ describe('vue-splitter', () => {
       vm.percent = 75;
       vm.onClick();
       expect(vm.percent).toBe(75);
-    })
+    });
+    it("should emit a resize event when the dragger is clicked", () => {
+      const spy = spyOn(vm, '$emit');
+      vm.hasMoved = false;
+      vm.percent = 75;
+      vm.onClick();
+      expect(spy).toHaveBeenCalledWith('resize');
+    });
+    it("should not emit a resize event when the dragger is clicked and the cursor has moved", () => {
+      const spy = spyOn(vm, '$emit');
+      vm.hasMoved = true;
+      vm.percent = 75;
+      vm.onClick();
+      expect(spy).not.toHaveBeenCalledWith('resize');
+    });
   });
   describe("onMouseDown", () => {
     it("should set active to true and hasMoved to false", () => {

@@ -46,6 +46,7 @@
       onClick () {
         if (!this.hasMoved) {
           this.percent = 50;
+          this.$emit('resize');
         }
       },
       onMouseDown () {
