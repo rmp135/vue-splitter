@@ -1,10 +1,16 @@
 # vue-splitter-comp
 
+[![Build Status](https://travis-ci.org/rmp135/vue-splitter-comp.svg?branch=master)](https://travis-ci.org/rmp135/vue-splitter-comp)
+
 For splitting a view in two!
 
-__[Example](https://rmp135.github.io/vue-splitter-comp/)__
+__[Demo](https://rmp135.github.io/vue-splitter-comp/)__
 
 ## Installing
+
+Install from npm.
+
+`yarn add vue-splitter-comp`
 
 Import the component.
 
@@ -12,14 +18,14 @@ Import the component.
 import VueSplitter from "vue-splitter-comp"
 ```
 
-Load it into the `components` section of the vue component.
+Include it in the `components` section of the vue component.
 
 ```javascript
 components: {
   VueSplitter
 }
 ```
-Load it into the html, populating the `left-pane` and `right-pane` slots.
+Use it in the html, populating the `left-pane` and `right-pane` slots.
 
 ```html
 <vue-splitter :margin="20">
@@ -42,4 +48,10 @@ The dragger can be dragged left and right to move the panes. It can be clicked t
 
 ## Styles
 
-The `.splitter` class can be overwritten to apply the style you would like.
+The following classes may be overridden to apply the style you would like.
+
+The component is wrapped in a `.vue-splitter-comp` class.
+
+Each pane has a `.splitter-pane` class, with a `.left-pane` and `.right-pane` class respectively.
+
+The splitter bar has a `.splitter` class.
