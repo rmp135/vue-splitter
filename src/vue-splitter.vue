@@ -1,9 +1,9 @@
 <template>
-  <div :style="{ cursor, userSelect }" class="vue-splitter-comp" @mouseup="onMouseUp" @mousemove="onMouseMove">
+  <div :style="{ cursor, userSelect }" class="vue-splitter-comp" @mouseup="onUp" @mousemove="onMouseMove" @touchmove="onMove" @touchend="onUp">
     <div :style="{ width: percent+'%' }" class="left-pane splitter-pane">
       <slot name="left-pane"></slot>
     </div>
-    <div class="splitter" @mousedown="onMouseDown" @click="onClick"></div>
+    <div class="splitter" @mousedown="onDown" @click="onClick" @touchstart.prevent="onDown"></div>
     <div :style="{ width: 100-percent+'%'}" class="right-pane splitter-pane">
       <slot name="right-pane"></slot>
     </div>
@@ -49,17 +49,14 @@
           this.$emit('resize');
         }
       },
-      onMouseDown () {
+      onDown (e) {
         this.active = true;
         this.hasMoved = false;
       },
-      onMouseUp () {
+      onUp () {
         this.active = false;
       },
-      onMouseMove (e) {
-        if (e.buttons === 0 || e.which === 0) {
-          this.active = false;
-        }
+      onMove (e) {
         if (this.active) {
           let offset = 0;
           let target = e.currentTarget;
@@ -74,6 +71,12 @@
           this.$emit('resize');
           this.hasMoved = true;
         }
+      },
+      onMouseMove (e) {
+        if (e.buttons === 0 || e.which === 0) {
+          this.active = false;
+        }
+        this.onMove(e);
       }
     }
   }

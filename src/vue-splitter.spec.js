@@ -15,7 +15,7 @@ describe('vue-splitter', () => {
       expect(vm.percent).toBe(50);
     })
   });
-  describe('onMouseMove', () => {
+  describe('onMove', () => {
     it('should not allow moving lower than the margin size', () => {
       const mockEvent = {
         pageX: 19,
@@ -24,7 +24,7 @@ describe('vue-splitter', () => {
         }
       };
       expect(vm.percent).toBe(50);
-      vm.onMouseMove(mockEvent);
+      vm.onMove(mockEvent);
       expect(vm.percent).toBe(50);
     });
     it('should not allow moving higher than the margin size', () => {
@@ -35,7 +35,7 @@ describe('vue-splitter', () => {
         }
       };
       expect(vm.percent).toBe(50);
-      vm.onMouseMove(mockEvent);
+      vm.onMove(mockEvent);
       expect(vm.percent).toBe(50);
     });
     it('should not move if active is false', () => {
@@ -46,16 +46,8 @@ describe('vue-splitter', () => {
         }
       };
       vm.active = false;
-      vm.onMouseMove(mockEvent);
+      vm.onMove(mockEvent);
       expect(vm.percent).toBe(50);
-    });
-    it('should set active to false if no buttons are pressed', () => {
-      const mockEvent = {
-        buttons: 0
-      };
-      vm.active = true;
-      vm.onMouseMove(mockEvent);
-      expect(vm.active).toBe(false);
     });
     it('should move the percent based on the event', () => {
       const mockEvent = {
@@ -66,7 +58,7 @@ describe('vue-splitter', () => {
         }
       };
       vm.active = true;
-      vm.onMouseMove(mockEvent);
+      vm.onMove(mockEvent);
       expect(vm.percent).toBe(75);
     });
     it('should subtract the offsetLeft of the parent until there is no parent', () => {
@@ -84,7 +76,7 @@ describe('vue-splitter', () => {
         }
       };
       vm.active = true;
-      vm.onMouseMove(mockEvent);
+      vm.onMove(mockEvent);
       expect(vm.percent).toBe(65);
     })
     it('should set hasMoved to true when the mouse has moved', () => {
@@ -95,7 +87,7 @@ describe('vue-splitter', () => {
         }
       };
       vm.active = true;
-      vm.onMouseMove(mockEvent);
+      vm.onMove(mockEvent);
       expect(vm.hasMoved).toBe(true);
     });
     it('should trigger the resize event', () => {
@@ -107,9 +99,19 @@ describe('vue-splitter', () => {
         }
       };
       vm.active = true;
-      vm.onMouseMove(mockEvent);
+      vm.onMove(mockEvent);
       expect(spy).toHaveBeenCalledWith('resize');
     })
+  });
+  describe("onMouseMove", () => {
+    it('should set active to false if no buttons are pressed', () => {
+      const mockEvent = {
+        buttons: 0
+      };
+      vm.active = true;
+      vm.onMouseMove(mockEvent);
+      expect(vm.active).toBe(false);
+    });
   });
   describe("onClick", () => {
     it("should reset the percentage if the mouse has not moved", () => {
@@ -139,19 +141,19 @@ describe('vue-splitter', () => {
       expect(spy).not.toHaveBeenCalledWith('resize');
     });
   });
-  describe("onMouseDown", () => {
+  describe("onDown", () => {
     it("should set active to true and hasMoved to false", () => {
       vm.hasMoved = true;
       vm.active = false;
-      vm.onMouseDown();
+      vm.onDown();
       expect(vm.hasMoved).toBe(false);
       expect(vm.active).toBe(true);
     });
   });
-  describe("onMouseUp", () => {
+  describe("onUp", () => {
     it("should set active to false", () => {
       vm.active = true;
-      vm.onMouseUp();
+      vm.onUp();
       expect(vm.active).toBe(false);
     });
   });
