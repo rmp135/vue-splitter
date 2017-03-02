@@ -40,7 +40,7 @@ Use it in the html, populating the `left-pane` and `right-pane` slots.
 
 The `margin` prop can be used to set the percentage that the dragger should not exceed on either side. Defaults to 10%.
 
-The `onResize` event will be fired when the dragger is moved.
+The `resize` event will be fired when the dragger is moved.
 
 ## Using
 
