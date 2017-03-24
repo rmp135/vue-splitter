@@ -3,7 +3,7 @@
     <div :style="{ width: percent+'%' }" class="left-pane splitter-pane">
       <slot name="left-pane"></slot>
     </div>
-    <div class="splitter" @mousedown="onDown" @click="onClick" @touchstart.prevent="onDown"></div>
+    <div class="splitter" :class="{active}" @mousedown="onDown" @click="onClick" @touchstart.prevent="onDown"></div>
     <div :style="{ width: 100-percent+'%'}" class="right-pane splitter-pane">
       <slot name="right-pane"></slot>
     </div>

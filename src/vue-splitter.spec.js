@@ -15,6 +15,18 @@ describe('vue-splitter', () => {
       expect(vm.percent).toBe(50);
     })
   });
+  describe('DOM', () => {
+    it('should set the active class when active', (done) => {
+      let elDragger = vm.$el.querySelector('.splitter')
+      expect(elDragger.className).toEqual('splitter')
+      vm.active = true
+      Vue.nextTick(() => {
+        elDragger = vm.$el.querySelector('.splitter')
+        expect(elDragger.className).toEqual('splitter active')
+        done()
+      })
+    })
+  })
   describe('onMove', () => {
     it('should not allow moving lower than the margin size', () => {
       const mockEvent = {
