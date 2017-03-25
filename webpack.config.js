@@ -2,7 +2,7 @@ module.exports = {
   entry: "./src/vue-splitter.vue",
   output: {
     filename: "dist/vue-splitter.js",
-    library: "VueSplitterComp",
+    library: "VueSplitter",
     libraryTarget: "umd"
   },
   module: {

@@ -9,14 +9,14 @@
       max-height: 200px;
       overflow-y: auto;
     }
-    .vue-splitter-comp .splitter:hover {
+    .vue-splitter .splitter:hover {
       background-color: blue;
     }
-    .vue-splitter-comp .splitter.active {
+    .vue-splitter .splitter.active {
       background-color: red;
     }
   </style>
-  <title>vue-splitter-comp</title>
+  <title>vue-splitter</title>
 </head>
 <body>
   <div id="app">
@@ -26,12 +26,12 @@
           <div class="container">
             <div class="nav-left">
               <div class="nav-item">
-                <h1 class="title">VueSplitterComp</h1>
+                <h1 class="title">VueSplitter</h1>
               </div>
             </div>
             <div class="nav-right">
               <div class="nav-item">
-                <a href="https://github.com/rmp135/vue-splitter-comp">GitHub</a>
+                <a href="https://github.com/rmp135/vue-splitter">GitHub</a>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
     </section>
     <section class="section">
       <div class="container">
-        <vue-splitter-comp @resize="onResize">
+        <vue-splitter @resize="onResize">
           <template slot="left-pane">
             <section class="section">
               <div class="content">
@@ -87,7 +87,7 @@
                 </div>
               </section>
             </template>
-          </vue-splitter-comp>
+          </vue-splitter>
       </div>
     </section>
     <footer class="footer">
@@ -98,7 +98,7 @@
       </div>
     </footer>
   </div>
-  <script type="text/javascript" src="https://unpkg.com/vue-splitter-comp"></script>
+  <script type="text/javascript" src="https://unpkg.com/vue-splitter"></script>
   <script type="text/javascript">
     new Vue({
       el: '#app',
@@ -111,7 +111,7 @@
         }
       },
       components:  {
-        VueSplitterComp
+        VueSplitter
       }
     })
   </script>

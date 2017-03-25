@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ cursor, userSelect }" class="vue-splitter-comp" @mouseup="onUp" @mousemove="onMouseMove" @touchmove="onMove" @touchend="onUp">
+  <div :style="{ cursor, userSelect }" class="vue-splitter" @mouseup="onUp" @mousemove="onMouseMove" @touchmove="onMove" @touchend="onUp">
     <div :style="{ width: percent+'%' }" class="left-pane splitter-pane">
       <slot name="left-pane"></slot>
     </div>
@@ -10,7 +10,7 @@
   </div>
 </template>
 <style lang="scss">
-  .vue-splitter-comp {
+  .vue-splitter {
     height: inherit;
     display: flex;
     .splitter-pane {

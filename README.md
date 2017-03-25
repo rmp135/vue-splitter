@@ -1,21 +1,21 @@
-# vue-splitter-comp
+# vue-splitter
 
-[![Build Status](https://travis-ci.org/rmp135/vue-splitter-comp.svg?branch=master)](https://travis-ci.org/rmp135/vue-splitter-comp)
+[![Build Status](https://travis-ci.org/rmp135/vue-splitter.svg?branch=master)](https://travis-ci.org/rmp135/vue-splitter)
 
 For splitting a Vue in two!
 
-__[Demo](https://rmp135.github.io/vue-splitter-comp/)__
+__[Demo](https://rmp135.github.io/vue-splitter/)__
 
 ## Installing
 
 Install from npm.
 
-`yarn add vue-splitter-comp`
+`yarn add vue-splitter`
 
 Import the component.
 
 ```javascript
-import VueSplitter from "vue-splitter-comp"
+import VueSplitter from "vue-splitter"
 ```
 
 Include it in the `components` section of the vue component.
@@ -50,7 +50,7 @@ The dragger can be dragged left and right to move the panes. It can be clicked t
 
 The following classes may be overridden to apply the style you would like.
 
-The component is wrapped in a `.vue-splitter-comp` class.
+The component is wrapped in a `.vue-splitter` class.
 
 Each pane has a `.splitter-pane` class, with a `.left-pane` and `.right-pane` class respectively.
 
