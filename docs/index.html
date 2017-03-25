@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/bulma/css/bulma.css"></style>
+  <script type="text/javascript" src="https://unpkg.com/moment"></script>
+  <script type="text/javascript" src="https://unpkg.com/vue"></script>
+  <style media="screen">
+    .events {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .vue-splitter-comp .splitter:hover {
+      background-color: blue;
+    }
+    .vue-splitter-comp .splitter.active {
+      background-color: red;
+    }
+  </style>
+  <title>vue-splitter-comp</title>
+</head>
+<body>
+  <div id="app">
+    <section class="hero is-dark">
+      <div class="hero-head">
+        <div class="nav">
+          <div class="container">
+            <div class="nav-left">
+              <div class="nav-item">
+                <h1 class="title">VueSplitterComp</h1>
+              </div>
+            </div>
+            <div class="nav-right">
+              <div class="nav-item">
+                <a href="https://github.com/rmp135/vue-splitter-comp">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-body has-text-centered">
+        <div class="container">
+          <h1 class="subtitle">For splitting a Vue in two</h1>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <vue-splitter-comp @resize="onResize">
+          <template slot="left-pane">
+            <section class="section">
+              <div class="content">
+                <div class="message is-info">
+                  <div class="message-header">
+                    <p>Reset</p>
+                  </div>
+                  <div class="message-body">
+                    <p>Click the bar to bar to reset the splitter to 50%</p>
+                  </div>
+                </div>
+                <h2 class="title">Events</h2>
+                <h3 class="title">resize</h3>
+                <p>When the view has been resized.</p>
+                <h2 class="title">Props</h2>
+                <h3 class="title">margin</h3>
+                <p>How large, in percent, the margin on either side of the view should be. Default: 10</p>
+                <h2 class="title">Style</h2>
+                <p>The following styles can be applied to change the splitter to your liking.</p>
+                <h3>.splitter-pane</h3>
+                <p>The left <i>and</i> right panes.</p>
+                <h3>.right-pane</h3>
+                <p>The right pane only.</p>
+                <h3>.left-pane</h3>
+                <p>The left pane only.</p>
+                <h3>.splitter</h3>
+                <p>The splitter bar itself.</p>
+                <h3>.splitter.active</h3>
+                <p>Toggled when the splitter bar is active.</p>
+              </div>
+            </template>
+            <template slot="right-pane">
+              <section class="section">
+                <h1 class="title">Events</h1>
+                <p v-if="logs.length === 0">Try dragging the bar to generate some events.</p>
+                <p v-else>The following events have occurred.</p>
+                <div class="events">
+                  <div v-for="log in logs">{{ log }}</div>
+                </div>
+              </section>
+            </template>
+          </vue-splitter-comp>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>Made by <a href="https://twitter.com/rmp135">Ryan</a> with <a href="https://vuejs.org">Vue.js</a> and <a href="http://bulma.io">Bulma.</a></p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script type="text/javascript" src="https://unpkg.com/vue-splitter-comp"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        logs: []
+      },
+      methods: {
+        onResize () {
+          this.logs.unshift(`${(new moment().format('HH:mm:SSSS'))} - Resize`);
+        }
+      },
+      components:  {
+        VueSplitterComp
+      }
+    })
+  </script>
+</body>
+</html>

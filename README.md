@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/rmp135/vue-splitter-comp.svg?branch=master)](https://travis-ci.org/rmp135/vue-splitter-comp)
 
-For splitting a view in two!
+For splitting a Vue in two!
 
 __[Demo](https://rmp135.github.io/vue-splitter-comp/)__
 
