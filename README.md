@@ -10,12 +10,12 @@ __[Demo](https://rmp135.github.io/vue-splitter/)__
 
 Install from npm.
 
-`yarn add vue-splitter`
+`yarn add @rmp135/vue-splitter`
 
 Import the component.
 
 ```javascript
-import VueSplitter from "vue-splitter"
+import VueSplitter from "@rmp135/vue-splitter"
 ```
 
 Include it in the `components` section of the vue component.
