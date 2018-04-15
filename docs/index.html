@@ -6,7 +6,7 @@
   <script type="text/javascript" src="https://unpkg.com/vue"></script>
   <style media="screen">
     .events {
-      max-height: 200px;
+      max-height: 1000px;
       overflow-y: auto;
     }
     .vue-splitter .splitter:hover {
@@ -20,29 +20,23 @@
 </head>
 <body>
   <div id="app">
-    <section class="hero is-dark">
-      <div class="hero-head">
-        <div class="nav">
-          <div class="container">
-            <div class="nav-left">
-              <div class="nav-item">
-                <h1 class="title">VueSplitter</h1>
-              </div>
-            </div>
-            <div class="nav-right">
-              <div class="nav-item">
+      <section class="hero is-dark">
+        <div class="hero-head">
+        </div>
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <h1 class="title">
+              VueSplitter
+            </h1>
+            <h2 class="subtitle">
+              Split a Vue in two!
+            </h2>
+            <h2 class="subtitle">
                 <a href="https://github.com/rmp135/vue-splitter">GitHub</a>
-              </div>
-            </div>
+            </h2>
           </div>
         </div>
-      </div>
-      <div class="hero-body has-text-centered">
-        <div class="container">
-          <h1 class="subtitle">For splitting a Vue in two</h1>
-        </div>
-      </div>
-    </section>
+      </section>
     <section class="section">
       <div class="container">
         <vue-splitter @resize="onResize">
@@ -50,9 +44,6 @@
             <section class="section">
               <div class="content">
                 <div class="message is-info">
-                  <div class="message-header">
-                    <p>Reset</p>
-                  </div>
                   <div class="message-body">
                     <p>Click the bar to bar to reset the splitter to 50%</p>
                   </div>
