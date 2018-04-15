@@ -40,6 +40,8 @@ Use it in the html, populating the `left-pane` and `right-pane` slots.
 
 The `margin` prop can be used to set the percentage that the dragger should not exceed on either side. Defaults to 10%.
 
+The `horizontal` prop will create a horizontal splitter bar. Defaults to false. Note: An ancestor element (parent, parents parent etc) must have a fixed height for the horizontal splitter to work properly.
+
 The `resize` event will be fired when the dragger is moved.
 
 ## Using
@@ -52,6 +54,6 @@ The following classes may be overridden to apply the style you would like.
 
 The component is wrapped in a `.vue-splitter` class.
 
-Each pane has a `.splitter-pane` class, with a `.left-pane` and `.right-pane` class respectively.
+Each pane has a `.splitter-pane` class, with a `.left-pane` and `.right-pane` class respectively (corresponds to top and bottom panes for horizontal splitting).
 
 The splitter bar has a `.splitter` class.

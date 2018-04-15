@@ -15,12 +15,15 @@
     .vue-splitter .splitter.active {
       background-color: red;
     }
+    .horizontal-splitter {
+      height: 700px;
+    }
   </style>
   <title>vue-splitter</title>
 </head>
 <body>
   <div id="app">
-      <section class="hero is-dark">
+    <section class="hero is-dark">
         <div class="hero-head">
         </div>
         <div class="hero-body">
@@ -37,9 +40,9 @@
           </div>
         </div>
       </section>
-    <section class="section">
-      <div class="container">
-        <vue-splitter @resize="onResize">
+    <section class="section container">
+      <div class="vertical-splitter">
+        <vue-splitter @resize="onVerticalResize" :vertical="false">
           <template slot="left-pane">
             <section class="section">
               <div class="content">
@@ -54,14 +57,21 @@
                 <h2 class="title">Props</h2>
                 <h3 class="title">margin</h3>
                 <p>How large, in percent, the margin on either side of the view should be. Default: 10</p>
+                <h3 class="title">horizontal</h3>
+                <p>Whether the splitter should be horizontal. Default: false</p>
+                <div class="message is-warning">
+                  <div class="message-body">
+                    <p>Horizontal splitter requires an ancestor element to have a fixed height.</p>
+                  </div>
+                </div>
                 <h2 class="title">Style</h2>
                 <p>The following styles can be applied to change the splitter to your liking.</p>
                 <h3>.splitter-pane</h3>
-                <p>The left <i>and</i> right panes.</p>
-                <h3>.right-pane</h3>
-                <p>The right pane only.</p>
+                <p>The left <i>and</i> right (or top <i>and</i> bottom) panes.</p>
                 <h3>.left-pane</h3>
-                <p>The left pane only.</p>
+                <p>The left or top pane only.</p>
+                <h3>.right-pane</h3>
+                <p>The right or bottom pane only.</p>
                 <h3>.splitter</h3>
                 <p>The splitter bar itself.</p>
                 <h3>.splitter.active</h3>
@@ -71,10 +81,37 @@
             <template slot="right-pane">
               <section class="section">
                 <h1 class="title">Events</h1>
-                <p v-if="logs.length === 0">Try dragging the bar to generate some events.</p>
+                <p v-if="verticalLogs.length === 0">Try dragging the bar to generate some events.</p>
                 <p v-else>The following events have occurred.</p>
                 <div class="events">
-                  <div v-for="log in logs">{{ log }}</div>
+                  <div v-for="log in verticalLogs">{{ log }}</div>
+                </div>
+              </section>
+            </template>
+          </vue-splitter>
+      </div>
+      <div class="message is-primary">
+        <div class="message-header">
+          New!
+        </div>
+        <div class="message-body">The splitter can now be used as a horizontal splitter.</div>
+      </div>
+      <div class="horizontal-splitter">
+        <vue-splitter @resize="onHorizontalResize" :horizontal="true" :margin="20">
+          <template slot="left-pane">
+            <section class="section">
+              <div class="content">
+                <p>Top content goes in the left-pane.</p>
+              </div>
+            </template>
+            <template slot="right-pane">
+              <section class="section">
+                <p>Bottom content goes in the right-pane.</p>
+                <h1 class="title">Events</h1>
+                <p v-if="horizontalLogs.length === 0">Try dragging the bar to generate some events.</p>
+                <p v-else>The following events have occurred.</p>
+                <div class="events">
+                  <span v-for="log in horizontalLogs">{{ log }}</span>
                 </div>
               </section>
             </template>
@@ -94,11 +131,15 @@
     new Vue({
       el: '#app',
       data: {
-        logs: []
+        horizontalLogs: [],
+        verticalLogs: []
       },
       methods: {
-        onResize () {
-          this.logs.unshift(`${(new moment().format('HH:mm:SSSS'))} - Resize`);
+        onVerticalResize () {
+          this.verticalLogs.unshift(`${(new moment().format('HH:mm:SSSS'))} - Resize`);
+        },
+        onHorizontalResize () {
+          this.horizontalLogs.unshift(`${(new moment().format('HH:mm:SSSS'))} - Resize | `);
         }
       },
       components:  {
