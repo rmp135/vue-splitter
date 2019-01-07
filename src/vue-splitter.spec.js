@@ -278,6 +278,20 @@ describe('vue-splitter', () => {
       expect(vm.rightPaneStyle).toEqual({ width: "77%" })
     })
   })
+  describe("defaultPercent", () => {
+    it("should be 50 percent by default", () => {
+      Ctor = Vue.extend(splitter);
+      vm = new Ctor()
+      expect(vm.defaultPercent).toEqual(50)
+      expect(vm.percent).toEqual(50)
+    })
+    it("should set the percent to the default percent", () => {
+      Ctor = Vue.extend(splitter);
+      vm = new Ctor({ propsData: { defaultPercent: 12 } })
+      expect(vm.defaultPercent).toEqual(12)
+      expect(vm.percent).toEqual(12)
+    })
+  })
   describe("cursor", () => {
     it("should return ew-resize when the vm is active and vertical", () => {
       vm.active = true;

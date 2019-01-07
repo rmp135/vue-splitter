@@ -42,11 +42,13 @@ The `margin` prop can be used to set the percentage that the dragger should not 
 
 The `horizontal` prop will create a horizontal splitter bar. Defaults to false. Note: An ancestor element (parent, parents parent etc) must have a fixed height for the horizontal splitter to work properly.
 
+The `defaultPercent` prop will set the default starting and reset percentange. Defaults to 50%.
+
 The `resize` event will be fired when the dragger is moved.
 
-## Using
+## Usage
 
-The dragger can be dragged left and right to move the panes. It can be clicked to reset to 50%.
+The dragger can be dragged left and right to move the panes. It can be clicked to reset to the default percent.
 
 ## Styles
 

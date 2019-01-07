@@ -32,6 +32,10 @@
       horizontal: {
         type: Boolean,
         default: false
+      },
+      defaultPercent: {
+        type: Number,
+        default: 50
       }
     },
     data () {
@@ -49,10 +53,13 @@
       userSelect () { return this.active ? 'none' : '' },
       cursor () { return this.active ? this.horizontal ? 'ns-resize' : 'ew-resize' : '' },
     },
+    created () {
+      this.percent = this.defaultPercent
+    },
     methods: {
       onClick () {
         if (!this.hasMoved) {
-          this.percent = 50;
+          this.percent = this.defaultPercent;
           this.$emit('resize');
         }
       },
