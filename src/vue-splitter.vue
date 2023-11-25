@@ -1,106 +1,177 @@
-<template>
-  <div :style="{ cursor, userSelect, flexDirection }" class="vue-splitter" @mouseup="onUp" @mousemove="onMouseMove" @touchmove="onMove" @touchend="onUp">
-    <div :style="leftPaneStyle" class="left-pane splitter-pane">
-      <slot name="left-pane"></slot>
-    </div>
-    <div class="splitter" :class="{active}" :style ="splitterStyle" @mousedown="onDown" @click="onClick" @touchstart.prevent="onDown"></div>
-    <div :style="rightPaneStyle" class="right-pane splitter-pane">
-      <slot name="right-pane"></slot>
-    </div>
-  </div>
-</template>
 <style lang="scss">
   .vue-splitter {
+    display: grid;
     height: inherit;
-    display: flex;
-    .splitter-pane {
-      height: inherit;
-      overflow-y: auto;
+    &.vertical {
+      width: 100%;
+      > .splitter {
+        cursor: ew-resize;
+        width: 5px;
+      }
+    }
+    &.horizontal {
+      height: 100%;
+      > .splitter {
+        cursor: ns-resize;
+        height: 5px;
+      }
     }
     .splitter {
       background-color: #9e9e9e;
     }
-  }
-</style>
-<script>
-  export default {
-    props: {
-      margin: {
-        type: Number,
-        default: 10
-      },
-      horizontal: {
-        type: Boolean,
-        default: false
-      },
-      defaultPercent: {
-        type: Number,
-        default: 50
-      }
-    },
-    data () {
-      return {
-        active: false,
-        percent: 50,
-        hasMoved: false
-      }
-    },
-    computed: {
-      flexDirection () { return this.horizontal ? 'column' : 'row' },
-      splitterStyle () { return this.horizontal ? { height: '5px', cursor: 'ns-resize' } : { width: '5px', cursor: 'ew-resize' } },
-      leftPaneStyle () { return this.horizontal ? { height: this.percent + '%' } : { width: this.percent + '%' } },
-      rightPaneStyle () { return this.horizontal ? { height: 100-this.percent + '%' } : { width: 100-this.percent + '%' } },
-      userSelect () { return this.active ? 'none' : '' },
-      cursor () { return this.active ? this.horizontal ? 'ns-resize' : 'ew-resize' : '' },
-    },
-    created () {
-      this.percent = this.defaultPercent
-    },
-    methods: {
-      onClick () {
-        if (!this.hasMoved) {
-          this.percent = this.defaultPercent;
-          this.$emit('resize');
-        }
-      },
-      onDown (e) {
-        this.active = true;
-        this.hasMoved = false;
-      },
-      onUp () {
-        this.active = false;
-      },
-      onMove (e) {
-        let offset = 0;
-        let target = e.currentTarget;
-        let percent = 0;
-        if (this.active) {
-          if (this.horizontal) {
-            while (target) {
-              offset += target.offsetTop;
-              target = target.offsetParent;
-            }
-            percent =  Math.floor(((e.pageY - offset) / e.currentTarget.offsetHeight)*10000)/100;
-          } else {
-            while (target) {
-              offset += target.offsetLeft;
-              target = target.offsetParent;
-            }
-            percent =  Math.floor(((e.pageX - offset) / e.currentTarget.offsetWidth)*10000)/100;
-          }
-          if (percent > this.margin && percent < 100 - this.margin) {
-            this.percent = percent;
-          }
-          this.$emit('resize');
-          this.hasMoved = true;
-        }
-      },
-      onMouseMove (e) {
-        if (e.buttons === 0 || e.which === 0) {
-          this.active = false;
-        }
-        this.onMove(e);
-      }
+    .splitter-pane {
+      overflow-y: auto;
     }
   }
+</style>
+<template>
+  <div
+    :style="{ userSelect, gridTemplate }"
+    class="vue-splitter"
+    :class="{ horizontal: isHorizontal, vertical: !isHorizontal }"
+    ref="containerRef"
+  >
+    <div 
+      class="splitter-pane"
+      :class="leftPaneClass"
+    >
+      <slot name="left-pane"></slot>
+      <slot name="top-pane"></slot>
+    </div>
+    <div
+      class="splitter"
+      :class="{ active: isActive }"
+      @mousedown="onSplitterMouseDown"
+      @touchstart.passive="onSplitterTouchDown"
+      @click="onSplitterClick"
+    />
+    <div 
+      class="splitter-pane"
+      :class="rightPaneClass">
+      <slot name="right-pane"></slot>
+      <slot name="bottom-pane"></slot>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+
+const props = withDefaults(defineProps<{
+  isHorizontal?: boolean
+  percent?: number,
+  initialPercent?: number | string,
+}>(), {
+  isHorizontal: false,
+  initialPercent: 50
+})
+
+const emit = defineEmits<{
+  (event: 'update:percent', value: number): void
+  (event: 'splitter-click'): void
+}>()
+
+const isActive = ref(false)
+const percent = ref(50)
+const hasMoved = ref(false)
+const dragOffset = ref(0)
+
+const containerRef = ref<HTMLElement>()
+
+const modelPercent = computed<number>({
+  get() {
+    return props.percent ?? percent.value
+  },
+  set(value) {
+    emit('update:percent', value)
+    percent.value = value
+  }
+})
+
+modelPercent.value = Number(props.initialPercent)
+
+const leftPaneClass = computed(() => props.isHorizontal ? 'top-pane' : 'left-pane')
+const rightPaneClass = computed(() => props.isHorizontal ? 'bottom-pane' : 'right-pane')
+const gridTemplate = computed(() => props.isHorizontal ? `${modelPercent.value}% auto 1fr / none` : `none / ${modelPercent.value}% auto 1fr`)
+const userSelect = computed(() => isActive.value ? 'none' : 'auto')
+
+function onSplitterClick() {
+  if (!hasMoved.value) {
+    emit('splitter-click')
+  }
+}
+
+function onSplitterMouseDown(e: MouseEvent) {
+  dragOffset.value = props.isHorizontal ? e.offsetY : e.offsetX
+  onSplitterDown()
+}
+
+function onSplitterTouchDown() {
+  dragOffset.value = 0
+  onSplitterDown()
+}
+
+function onSplitterDown() {
+  isActive.value = true
+  hasMoved.value = false
+  addBodyListeners()
+}
+
+function addBodyListeners() {
+  document.body.addEventListener('mousemove', onBodyMouseMove)
+  document.body.addEventListener('touchmove', onBodyTouchMove)
+  document.body.addEventListener('touchend', onBodyUp, { once: true })
+  document.body.addEventListener('mouseup', onBodyUp, { once: true })
+}
+
+function onBodyTouchMove(e: TouchEvent) {
+  if (isActive.value) {
+    calculateSplitterPercent(e.touches[0])
+  }
+}
+
+function onBodyMouseMove(e: MouseEvent) {
+  if (e.buttons && e.buttons === 0) {
+    isActive.value = false
+    removeBodyListeners()
+  }
+  if (isActive.value) {
+    calculateSplitterPercent(e)
+  }
+}
+
+function calculateSplitterPercent(e: MouseEvent | Touch) {
+  let offset = dragOffset.value
+  let target = containerRef.value as HTMLElement
+  let percent = 0
+  if (props.isHorizontal) {
+    offset += target.offsetTop
+    while (target.offsetParent) {
+      target = target.offsetParent as HTMLElement
+      offset += target.offsetTop
+    }
+    percent = Math.floor(((e.pageY - offset) / containerRef.value!.offsetHeight)*10000)/100
+  } else {
+    offset += target.offsetLeft
+    while (target.offsetParent) {
+      target = target.offsetParent as HTMLElement
+      offset += target.offsetLeft
+    }
+    percent = Math.floor(((e.pageX - offset) / containerRef.value!.offsetWidth)*10000)/100
+  }
+  if (percent > 0 && percent < 100) {
+    modelPercent.value = percent
+    hasMoved.value = true
+  }
+}
+
+function onBodyUp() {
+  isActive.value = false
+  removeBodyListeners()
+}
+
+function removeBodyListeners() {
+  document.body.removeEventListener('touchmove', onBodyTouchMove)
+  document.body.removeEventListener('mousemove', onBodyMouseMove)
+}
+
 </script>

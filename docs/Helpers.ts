@@ -1,0 +1,5 @@
+export function GenLorum() {
+  return `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet tellus felis. Etiam nec nunc quam. Mauris convallis felis mi, ac consequat arcu dictum ut. Nunc suscipit orci in egestas fringilla. Morbi ultricies quam sit amet mauris fringilla rhoncus. Sed efficitur ultrices ex, nec fringilla tortor egestas scelerisque. Etiam porta blandit faucibus.
+
+  Pellentesque sem nunc, tincidunt nec pulvinar et, ultricies at diam. Maecenas eget eros congue, posuere nunc id, eleifend sapien. Praesent non vehicula ante. Quisque pharetra pellentesque nisl. Nunc feugiat venenatis feugiat. Maecenas euismod purus erat, a lacinia lorem tempus quis. Duis luctus tellus at laoreet tempus. Proin eu purus neque. Proin metus nunc, sollicitudin nec ornare sit amet, tempor nec mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.`
+}
