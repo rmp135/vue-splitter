@@ -23,6 +23,7 @@
     "email": "rmp135@gmail.com"
   },
   "scripts": {
+    "prepack": "npm run build",
     "serve": "vite",
     "build": "vite build",
     "test": "vitest",
