@@ -1,8 +1,8 @@
 {
   "name": "@rmp135/vue-splitter",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "license": "MIT",
-  "main": "./dist/vue-splitter.umd.cjs",
+  "types": "./dist/vue-splitter.d.ts",
   "module": "./dist/vue-splitter.js",
   "files": [
     "dist"
@@ -10,8 +10,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/vue-splitter.js",
-      "require": "./dist/vue-splitter.umd.cjs"
+      "import": "./dist/vue-splitter.js"
     }
   },
   "repository": {
@@ -40,6 +39,7 @@
     "sass": "^1.69.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.6.3",
     "vitepress": "^1.0.0-rc.29",
     "vitest": "^0.34.6",
     "vue": "^3.3.8"

@@ -2,6 +2,7 @@
 import createVuePlugin from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import path from 'path'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   test: {
@@ -24,6 +25,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    createVuePlugin()
+    createVuePlugin(),
+    dts({ rollupTypes: true })
   ],
 })
