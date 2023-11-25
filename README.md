@@ -22,12 +22,12 @@ Use it in the HTML template, populating the `left-pane` and `right-pane` slots.
 
 ```html
 <vue-splitter>
-  <div slot="left-pane">
+  <template #left-pane>
     <div>Some left content here.</div>
-  </div>
-  <div slot="right-pane">
+  </template>
+  <template #right-pane>
     <div>Some right content here.</div>
-  </div>
+  </template>
 </vue-splitter>
 ```
 
