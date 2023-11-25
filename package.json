@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rmp135/vue-splitter.git"
+    "url": "git+https://github.com/rmp135/vue-splitter.git"
   },
   "author": {
     "name": "Ryan Poole",
