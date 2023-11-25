@@ -14,6 +14,7 @@ export default defineConfig({
       name: 'VueSplitter'
     },
     rollupOptions: {
+      external: ['vue'],
       output: {
         intro: 'import "./style.css";',
         globals: {
