@@ -2,6 +2,8 @@
 
 For splitting a Vue in two!
 
+[![npm (scoped)](https://img.shields.io/npm/v/%40rmp135/vue-splitter)](https://www.npmjs.com/package/@rmp135/vue-splitter)
+
 __[Demo](https://rmp135.github.io/vue-splitter/#usage)__
 
 Compatible with Vue 3 only.
