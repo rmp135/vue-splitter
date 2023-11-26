@@ -2,7 +2,7 @@
 
 For splitting a Vue in two!
 
-[![npm (scoped)](https://img.shields.io/npm/v/%40rmp135/vue-splitter)](https://www.npmjs.com/package/@rmp135/vue-splitter)
+[![npm (scoped)](https://img.shields.io/npm/v/%40rmp135/vue-splitter)](https://www.npmjs.com/package/@rmp135/vue-splitter) [![Run Tests](https://github.com/rmp135/vue-splitter/actions/workflows/test.yml/badge.svg)](https://github.com/rmp135/vue-splitter/actions/workflows/test.yml)
 
 __[Demo](https://rmp135.github.io/vue-splitter/#usage)__
 
